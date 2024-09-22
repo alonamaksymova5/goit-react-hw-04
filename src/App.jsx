@@ -59,7 +59,7 @@ function App() {
 
   return (
     <>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSubmit={handleSearch} />
       <div className="container">
         <Toaster
           position="top-center"
