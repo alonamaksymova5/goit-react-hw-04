@@ -1,0 +1,37 @@
+import toast from 'react-hot-toast';
+import s from './SearchBar.module.css';
+
+export default function SearchBar({ onSearch }) {
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const search = form.elements.search.value;
+
+    if (form.elements.search.value.trim() === "") {
+        toast.error("We can't find something with empty value of search");
+    } else {
+        onSearch(search);
+    }
+
+    form.reset();
+    };
+
+    return (
+    <header className={s.header}>
+        <form className={s.form} onSubmit={handleSubmit}>
+        <input
+        className={s.input}
+        type="text"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search images and photos"
+        name="search"
+        />
+        <button className={s.button} type="submit">
+            Search
+        </button>
+        </form>
+    </header>
+    );
+}
+
