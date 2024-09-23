@@ -1,9 +1,11 @@
-// import s from './ImageCard.module.css';
+import s from './ImageCard.module.css';
 
-export default function ImageCard({ image, onImageClick }) {
+const ImageCard = ({ image, onImageClick }) => {
     return (
-        <li onClick={() => onImageClick(image)}>
+        <div className={s.card} onClick={() => onImageClick(image)}>
             <img src={image.urls.small} alt={image.alt.description} />
-        </li>
+        </div>
     );
 };
+
+export default ImageCard;

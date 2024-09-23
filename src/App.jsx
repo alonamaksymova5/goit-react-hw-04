@@ -1,12 +1,11 @@
-import { useState } from 'react'
-// import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
 import toast, { Toaster } from "react-hot-toast";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
 import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
 import ImageModal from "./components/ImageModal/ImageModal.jsx";
 import Loader from "./components/Loader/Loader.jsx";
-import LoadMoreButton from './components/LoadMoreButton/LoadMoreButton.jsx'
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx'
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
 import searchApi from "./searchApi.js";
 
@@ -36,7 +35,7 @@ function App() {
       } else {
         setError(true);
       }
-    } catch () {
+    } catch (error) {
       toast.error(
         "Network error. Please check your internet connection and try again."
       );
@@ -79,7 +78,7 @@ function App() {
           <ImageGallery images={images} onImageClick={openModal} />
         )}
         {loading && <Loader />}
-        {images.length > 0 && <LoadMoreButton page={handlePage} />}
+        {images.length > 0 && <LoadMoreBtn page={handlePage} />}
 
         {selectedImage && (
           <ImageModal
