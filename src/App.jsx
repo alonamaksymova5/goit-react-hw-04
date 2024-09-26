@@ -22,11 +22,16 @@ function App() {
     try {
       if (page === 1) {
         setImages([]);
+        
       }
       setLoading(true);
       setError(false);
 
       const data = await searchApi(result, page);
+      console.log(data);
+      
+      
+      
 
       if (data.length !== 0) {
         setImages((prevImages) => [...prevImages, ...data]);
@@ -35,7 +40,7 @@ function App() {
       } else {
         setError(true);
       }
-    } catch (error) {
+    } catch {
       toast.error(
         "Network error. Please check your internet connection and try again."
       );

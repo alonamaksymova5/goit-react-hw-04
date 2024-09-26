@@ -7,8 +7,9 @@ const SearchBar = ({ onSubmit }) => {
     const form = e.target;
     const search = form.elements.search.value;
 
-    if (form.elements.search.value.trim() === "") {
+    if (search.trim() === "") {
         toast.error("We can't find something with empty value of search");
+        return;
     } else {
         onSubmit(search);
     }

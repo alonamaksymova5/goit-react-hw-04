@@ -1,9 +1,9 @@
-// import s from './ErrorMessage.module.css';
+import s from './ErrorMessage.module.css';
 
 const ErrorMessage = () => {
     return (
-        <div>
-            <div>Sorry, we don`t find images</div>
+        <div className={s.wrapperText}>
+            <div className={s.text}>Sorry, we don`t find images</div>
         </div>
     );
 };

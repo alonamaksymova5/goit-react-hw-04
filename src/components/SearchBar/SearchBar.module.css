@@ -1,19 +1,22 @@
 .header {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 10px;
+    background-color: gray;
+    height: 60px;
+    box-shadow: 0 4px 4px rgba(25, 25, 25, 0.5);
 }
 
 .form {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .input {
     width: 400px;
     height: 40px;
     padding: 15px;
-    margin-bottom: 10px;
     border: 2px solid rgba(116, 116, 125, 0.4);
     border-radius: 4px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
@@ -21,7 +24,7 @@
 }
 
 .input:hover {
-    border: green;
+    border: gray;
 }
 
 .button {
@@ -33,13 +36,12 @@
     min-width: 169px;
     height: 40px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
-    background: black;
+    background: red;
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 0.04em;
     cursor: pointer;
     font-family: inherit;
-    display: block;
     margin: 0 auto;
     text-align: center;
     color: white;
@@ -48,5 +50,5 @@
 
 .button:hover,
 .button:focus {
-    background: sandybrown;
+    background: rgb(237, 132, 56);
 }
