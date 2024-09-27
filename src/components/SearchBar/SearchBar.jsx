@@ -8,7 +8,7 @@ const SearchBar = ({ onSubmit }) => {
     const search = form.elements.search.value;
 
     if (search.trim() === "") {
-        toast.error("We can't find something with empty value of search");
+        toast.error("You need to enter a word or words!");
         return;
     } else {
         onSubmit(search);

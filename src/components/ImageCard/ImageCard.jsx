@@ -1,13 +1,14 @@
 import s from './ImageCard.module.css';
 
-const ImageCard = ({ image, onImageClick }) => {
-    console.log(image);
-    
+const ImageCard = ({ likes, smallImage, largeImage, alt,  openModalClick }) => {
     return (
-        <li className={s.card} onClick={() => onImageClick(image)}>
-            
-            <img src={image.urls.small} alt={image.alt.description} />
-        </li>
+        <div className={s.picture}>
+            <img className={s.card} src={smallImage} alt={alt} onClick={() => openModalClick(largeImage)}/>
+            <span>
+                <p>Likes: {likes}</p>
+                <p>{alt}</p>
+            </span>
+        </div>
     );
 };
 
