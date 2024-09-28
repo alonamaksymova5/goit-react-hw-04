@@ -1,13 +1,14 @@
+import './App.css';
 import { useState } from 'react';
-import './App.css'
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import Modal from "react-modal";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
 import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
 import ImageModal from "./components/ImageModal/ImageModal.jsx";
 import Loader from "./components/Loader/Loader.jsx";
-import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx'
+import LoadMoreBtn from './components/LoadMoreBtn/LoadMoreBtn.jsx';
 import SearchBar from "./components/SearchBar/SearchBar.jsx";
-import searchApi from "./searchApi.js";
+import searchImages from "./searchApi.js";
 
 
 function App() {
@@ -15,84 +16,70 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [search, setSearch] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentImg, setCurrentImg] = useState(null);
 
-  const handleSearch = async (result, page = 1) => {
+  Modal.setAppElement("#root");
+
+  const openModal = (imageURL) => {
+    setCurrentImg(imageURL);
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setCurrentImg(null);
+  };
+
+  const submitImages = async (newSearch) => {
     try {
-      if (page === 1) {
-        setImages([]);
-        
-      }
-      setLoading(true);
+      setCurrentPage(1);
       setError(false);
+      setLoading(true);
+      setSearch(newSearch);
 
-      const data = await searchApi(result, page);
-      console.log(data);
-      
-      
-      
-
-      if (data.length !== 0) {
-        setImages((prevImages) => [...prevImages, ...data]);
-        setSearchTerm(result);
-        setCurrentPage(page);
-      } else {
-        setError(true);
-      }
+      const data = await searchImages(newSearch, 1);
+      setImages(data);
     } catch {
-      toast.error(
-        "Network error. Please check your internet connection and try again."
-      );
+      setError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  const handlePage = () => {
-    handleSearch(searchTerm, currentPage + 1);
+  const loadMoreImages = async () => {
+    try {
+      setLoading(true);
+
+      const morePage = currentPage + 1;
+
+      const data = await searchImages(search, morePage);
+      setCurrentPage(morePage);
+      setImages((prev) => [...prev, ...data]);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const openModal = (image) => {
-    setSelectedImage(image);
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-  };
 
   return (
     <>
-      <SearchBar onSubmit={handleSearch} />
-      <div className="container">
-        <Toaster
-          position="top-center"
-          reverseOrder={false}
-          toastOptions={{
-            error: {
-              style: {
-                border: "1px solid #f44336",
-                padding: "16px",
-                color: "#f44336",
-              },
-            },
-          }}
-        />
-        {error && <ErrorMessage />}
-        {images.length > 0 && (
-          <ImageGallery images={images} onImageClick={openModal} />
-        )}
-        {loading && <Loader />}
-        {images.length > 0 && <LoadMoreBtn page={handlePage} />}
-
-        {selectedImage && (
-          <ImageModal
-            isOpen={selectedImage && true}
-            image={selectedImage}
-            onClose={closeModal}
-          />
-        )}
-      </div>
+      <SearchBar onSubmit={submitImages} />
+      <Toaster />
+      {images.length > 0 && (
+        <ImageGallery imagesGallery={images} openModalClick={openModal} />
+      )}
+      {images.length > 0 && !loading && (
+        <LoadMoreBtn loadMoreImages={loadMoreImages} />
+      )}
+      {error && <ErrorMessage />}
+      {loading && <Loader />}
+      {isOpen && (
+        <ImageModal isOpen={isOpen} onClose={closeModal} currentImg={currentImg} />
+      )}
     </>
   );
 }

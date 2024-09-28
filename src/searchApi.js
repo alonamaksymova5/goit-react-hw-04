@@ -1,20 +1,15 @@
 import axios from "axios";
 
-const searchImages = async (search, currentPage) => {
-  try {
-    const result = await axios.get(`https://api.unsplash.com/search/photos`, {
-      params: {
-        client_id: "iqD8yD-O5X4Mj65P2NI3QXsVL-BNZmV771TV3wRwd5Q",
-        page: currentPage,
-        query: search,
-        orientation: "landscape",
-      },
-    });
+const API_KEY = "iqD8yD-O5X4Mj65P2NI3QXsVL-BNZmV771TV3wRwd5Q";
 
-    return result.data.results;
-  } catch {
-    console.error("We cant get data from server");
-  }
+axios.defaults.baseURL = "https://api.unsplash.com/";
+
+const searchImages = async (search, currentPage) => {
+  const result = await axios.get(
+    `search/photos?client_id=${API_KEY}&query=${search}&per_page=8&page=${currentPage}`
+  );
+
+  return result.data.results;
 };
 
 export default searchImages;

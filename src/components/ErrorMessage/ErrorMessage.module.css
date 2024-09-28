@@ -1,7 +1,11 @@
-.text {
-    color: red;
+.wrapperText {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.wrapperText {
-    text-align: center;
+.text {
+    color: red;
+    font-size: 25px;
+    font-weight: 600;
 }
