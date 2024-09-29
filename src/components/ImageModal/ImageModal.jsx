@@ -2,9 +2,8 @@ import Modal from "react-modal";
 import s from './ImageModal.module.css';
 
 
-const ImageModal = ({ isOpen, currentImg, onClose }) => {
+const ImageModal = ({ isOpen, currentImg, currentAlt, onClose }) => {
     return (
-            <>
                 <Modal isOpen={isOpen} onRequestClose={onClose}
                     style={{
                         content: {
@@ -18,12 +17,12 @@ const ImageModal = ({ isOpen, currentImg, onClose }) => {
                             backgroundColor: "transparent",
                         },
                         overlay: {
-                            backgroundColor: "black",
+                            backgroundColor: "lightgray",
                         },
                 }}>
-                    <img  src={currentImg} alt="Large image" className={s.modal} />
+                <img src={currentImg} alt={currentAlt} className={s.modal} />
+                <p className={s.description}>{currentAlt || "No description available"}</p>
                 </Modal>
-            </>
     );
 };
 

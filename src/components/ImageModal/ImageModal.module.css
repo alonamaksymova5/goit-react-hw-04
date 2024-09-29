@@ -5,3 +5,13 @@
     max-height: 80vh;
     object-fit: contain;
 }
+
+.description {
+    text-align: center;
+    color: #fff;
+    margin-top: 10px;
+    max-width: 800px;
+    word-wrap: break-word;
+    font-size: 18px;
+    font-weight: 600;
+}

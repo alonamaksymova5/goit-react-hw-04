@@ -1,14 +1,29 @@
-.picture {
+.card {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 300px;
     height: 300px;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 2px 4px 4px 2px rgba(46, 47, 66, 0.08), 2px 2px 4px 2px rgba(46, 47, 66, 0.16), 2px 4px 8px 2px rgba(46, 47, 66, 0.08);
 }
 
-.card {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.card:hover {
+    cursor: pointer;
+    transform: scale(1.04);
 }
+
+.picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+}
+
+
+
+
+
+
