@@ -1,5 +1,5 @@
 import { ProgressBar } from "react-loader-spinner";
-import s from "./loader.module.css";
+import s from "./Loader.module.css";
 
 const Loader = () => {
     return (
